@@ -20,17 +20,21 @@ class User(models.Model):
     positionAtCompany = models.CharField(max_length=150)
     authority = models.ForeignKey(Authority)
 
+
 class State(models.Model):
     name = models.CharField(max_length=2)
 
+
 class Authority(models.Model):
     name = models.CharField(max_length=150, unique=True)
+
 
 class CandidateAttributes(models.Model):
     passionsAndGoals = models.CharField(max_length=500)
     workProjectDone = models.TextField
     skills = models.TextField
     user = models.ForeignKey(User)
+
 
 class JobPost(models.Model):
     title = models.CharField(max_length=100)
@@ -46,16 +50,20 @@ class JobPost(models.Model):
     enabled = models.BooleanField
     questionsId = models.ForeignKey(Questions)
 
+
 class Questions(models.Model):
+    id = models.AutoField(primary_key=True)
 
 class Question(models.Model):
     questionsId = models.ForeignKey(Questions)
     questions = models.CharField(max_length=500)
 
+
 class Answer(models.Model):
     questions = models.ForeignKey(Question)
     candidate = models.ForeignKey(User)
     answer = models.CharField(max_length=250)
+
 
 class ApplicationToJob(models.Model):
     candidate = models.ForeignKey(User)

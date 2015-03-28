@@ -13,6 +13,7 @@ CREATE TABLE "user"
   "addressLine2" character varying(300),
   "phoneNumber" character varying(20),
   "emailAddress" character varying(200),
+  “password” character varying(500),
   city character varying(200),
   state bigint,
   zipcode integer,

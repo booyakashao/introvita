@@ -5,6 +5,14 @@ from django.template import RequestContext, loader
 # Create your views here.
 
 
+def index(request):
+    template = loader.get_template('landing_page/index.html')
+    context = RequestContext(request, {
+         'response_message': 'Splash Page',
+    })
+    return HttpResponse(template.render(context))
+
+
 def employer_jobs(request):
     template = loader.get_template('employer/jobs.html')
     context = RequestContext(request, {

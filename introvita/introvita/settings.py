@@ -36,6 +36,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'introvita_user_interact',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,8 +59,12 @@ WSGI_APPLICATION = 'introvita.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'introvita',
+        'USER': 'introvita_user',
+        'PASSWORD': 'introvita_pwd_5321',
+        'HOST': 'smashthebeetles.com',
+        'PORT': '5432'
     }
 }
 
@@ -81,3 +86,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Template Settings
+
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]

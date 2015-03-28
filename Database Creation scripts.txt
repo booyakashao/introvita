@@ -46,7 +46,8 @@ CREATE TABLE authority
 (
   id integer NOT NULL DEFAULT nextval('"Authority_id_seq"'::regclass),
   name character varying(150) NOT NULL,
-  CONSTRAINT pk_authority_id PRIMARY KEY (id)
+  CONSTRAINT pk_authority_id PRIMARY KEY (id),
+  CONSTRAINT unique_name UNIQUE (name)
 )
 WITH (
   OIDS=FALSE

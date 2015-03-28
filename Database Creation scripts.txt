@@ -76,7 +76,7 @@ CREATE TABLE "job_post"
   company character varying(100),
   about text,
   summary text,
-  requirements text,
+  qualifications text,
   responsibilites text,
   "employerId" bigint,
   salary character varying(150),

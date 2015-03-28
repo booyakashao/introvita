@@ -66,7 +66,7 @@ class JobPost(models.Model):
     salary = models.CharField(max_length=150)
     limit = models.IntegerField()
     applied = models.IntegerField()
-    enabled = models.BooleanField()
+    enabled = models.BooleanField(default=True)
     questionsId = models.ForeignKey(Questions)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -94,7 +94,7 @@ class Answer(models.Model):
 class ApplicationToJob(models.Model):
     candidate = models.ForeignKey(User)
     jobPost = models.ForeignKey(JobPost)
-    applied = models.BooleanField()
+    applied = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

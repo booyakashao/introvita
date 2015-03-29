@@ -5,10 +5,18 @@ from django.db import models
 
 class State(models.Model):
     name = models.CharField(max_length=2)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return 'State Name: ' + self.name
 
 
 class Authority(models.Model):
     name = models.CharField(max_length=150, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return 'Authority Name: ' + self.name
 
 
 class User(models.Model):
@@ -28,6 +36,8 @@ class User(models.Model):
     department = models.CharField(max_length=200)
     positionAtCompany = models.CharField(max_length=150)
     authority = models.ForeignKey(Authority)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
 
 class CandidateAttributes(models.Model):
@@ -35,10 +45,14 @@ class CandidateAttributes(models.Model):
     workProjectDone = models.TextField()
     skills = models.TextField()
     user = models.ForeignKey(User)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
 
 class Questions(models.Model):
     id = models.AutoField(primary_key=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
 
 class JobPost(models.Model):
@@ -52,23 +66,35 @@ class JobPost(models.Model):
     salary = models.CharField(max_length=150)
     limit = models.IntegerField()
     applied = models.IntegerField()
-    enabled = models.BooleanField()
+    enabled = models.BooleanField(default=True)
     questionsId = models.ForeignKey(Questions)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
 
 class Question(models.Model):
     questionsId = models.ForeignKey(Questions)
-    questions = models.CharField(max_length=500)
+    question = models.CharField(max_length=500)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return 'Question: ' + self.question
 
 
 class Answer(models.Model):
     questions = models.ForeignKey(Question)
     candidate = models.ForeignKey(User)
     answer = models.CharField(max_length=250)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return 'Answer: ' + self.answer
 
 
 class ApplicationToJob(models.Model):
     candidate = models.ForeignKey(User)
     jobPost = models.ForeignKey(JobPost)
-    applied = models.BooleanField()
+    applied = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 

@@ -58,25 +58,20 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
-              <li><a href="../navbar-static-top/">Static top</a></li>
-              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+              <li><a href="../navbar-static-top/">Login</a></li>
+              <li><a href="{% url 'register' %}">Register</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
     </nav>
 
+    {% if error_message %}
+        <div class="alert alert-danger">{{ error_message }}</div>
+    {% endif %}
+
     <!-- Main component for a primary marketing message or call to action -->
-    <div class="jumbotron">
-        <h1>Welcome to Intro Vita</h1>
-        <p>This is random text I am placing on the screen so things won't feel empty</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="#" role="button">Big Blue Button &raquo;</a>
-        </p>
-
-        {% block content %}{% endblock %}
-      </div>
-
-    </div> <!-- /container -->
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% block content %}{% endblock %}
 
 
 </div>

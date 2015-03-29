@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 
+from introvita_user_interact.models import *
+
 # Create your views here.
 
 
@@ -11,6 +13,19 @@ def index(request):
          'response_message': 'Splash Page',
     })
     return HttpResponse(template.render(context))
+
+
+def register(request):
+    template = loader.get_template('register/register1.html')
+    context = RequestContext(request, {
+        'response_message': 'Registration Context',
+        'states': State.objects.all(),
+    })
+    return HttpResponse(template.render(context))
+
+
+def create_account(request):
+    return ""
 
 
 def employer_jobs(request):

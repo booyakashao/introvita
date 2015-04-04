@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.template import RequestContext, loader
 
@@ -25,7 +25,27 @@ def register(request):
 
 
 def create_account(request):
-    return ""
+    template = loader.get_template('register/register2.html')
+
+    new_user = User()
+    new_user.firstName = request.POST['firstName']
+    new_user.middleName = request.POST['middleName']
+    new_user.lastName = request.POST['lastName']
+    new_user.addressLine1 = request.POST['addressLine1']
+    new_user.addressLine2 = request.POST['addressLine2']
+    new_user.city = request.POST['city']
+    new_user.state = State.objects.get(name=request.POST['state'])
+    new_user.zipcode = request.POST['zip']
+    new_user.phoneNumber = request.POST['phoneNumber']
+    new_user.emailAddress = request.POST['emailAddress']
+    new_user.password = request.POST['password']
+    new_user.authority = Authority.objects.get(name="ROLE_USER")
+    User.save(new_user)
+
+    context = RequestContext(request, {
+        'response_message': 'Created a new user'
+    })
+    return HttpResponse(template.render(context))
 
 
 def employer_jobs(request):
